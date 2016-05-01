@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".Activities.MainActivity">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_sort_by_popularity"
+            android:title="@string/prf_sorted_key" />
+        <item
+            android:id="@+id/action_sort_by_rating"
+            android:title="@string/prf_sorted_highest_rated" />
+        <item
+            android:id="@+id/action_fav"
+            android:title="@string/favourite_txt" />
+    </group>
+
+</menu>
