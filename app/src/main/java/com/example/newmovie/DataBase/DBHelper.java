@@ -79,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return deleteRow;
     }
 
-s    public void delet(){
+    public void delet(){
         SQLiteDatabase sqDb = getWritableDatabase();
         sqDb.delete(DBContent.TABLE_NAME, null, null);
     }

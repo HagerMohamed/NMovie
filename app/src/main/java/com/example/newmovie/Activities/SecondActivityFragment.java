@@ -2,6 +2,7 @@ package com.example.newmovie.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,16 +15,15 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.newmovie.Adapters.ReviewAdapter;
 import com.example.newmovie.Adapters.TrailerAdapter;
 import com.example.newmovie.DataBase.DBHelper;
 import com.example.newmovie.Details.Movie;
-import com.example.newmovie.R;
 import com.example.newmovie.Details.ReviewDetails;
 import com.example.newmovie.Details.TrailersDetail;
+import com.example.newmovie.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -56,8 +56,21 @@ public class SecondActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
-        Intent in = getActivity().getIntent();
-        movie = in.getBundleExtra("bundelmovie").getParcelable("selectedMovie");
+        Configuration configuration = getResources().getConfiguration();
+
+        if (configuration.smallestScreenWidthDp >= 600) {
+            Bundle b = getArguments();
+            movie = (Movie) b.getParcelable("movie");
+        } else {
+
+            Intent intent = getActivity().getIntent();
+            if (intent.hasExtra("movie")) {
+                if (intent.getExtras().get("movie") != null) {
+                    movie = (Movie) intent.getExtras().getParcelable("movie");
+                }
+            }
+        }
+
         im = (ImageView) view.findViewById(R.id.img_view);
         title = (TextView) view.findViewById(R.id.title_txt);
         over_view = (TextView) view.findViewById(R.id.over_view_txt);

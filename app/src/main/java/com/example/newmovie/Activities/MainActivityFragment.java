@@ -1,6 +1,6 @@
 package com.example.newmovie.Activities;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -67,12 +67,7 @@ public class MainActivityFragment extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent in = new Intent(getActivity(), SecondActivity.class);
-                Bundle b = new Bundle();
-                b.putParcelable("selectedMovie", movie.get(position));
-                in.putExtra("bundelmovie", b);
-                startActivity(in);
+                
                 Movie m = movie.get(position);
                 change.changeFragment(m);
             }
@@ -81,8 +76,11 @@ public class MainActivityFragment extends Fragment {
         return v;
     }
 
-    public void selectMovie(Change c){
-        change = c;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        change= (Change) context;
     }
 
     @Override
